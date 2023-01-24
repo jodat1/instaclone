@@ -2,31 +2,39 @@
 
 <%= form_with(model: post) do |form| %>
   <h1>New post</h1>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div>
+    <% invalid = post.errors.include?(:title) %>
+
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title, class: "form-control" %>
+    <% if invalid%>
+      <p style="color: red;">
+      <%= post.errors.full_messages_for(:title).join(", ")%>
+      </p>
+    <%end%>
   </div>
 
   <div>
+    <% invalid = post.errors.include?(:description)%>
     <%= form.label :description, style: "display: block" %>
     <%= form.text_field :description, class: "form-control" %>
+    <% if invalid%>
+      <p style = "color: red;">
+      <%= post.errors.full_messages_for(:description).join(", ")%>
+      </p>
+    <%end%>
   </div>
 
   <div>
+    <% invalid = post.errors.include?(:keywords)%>
     <%= form.label :keywords, style: "display: block" %>
     <%= form.text_field :keywords, class: "form-control" %>
+    <% if invalid%>
+      <p style = "color: red;">
+        <%= post.errors.full_messages_for(:keywords).join(", ")%>
+      </p>
+    <%end%>
   </div>
 
   <div>
