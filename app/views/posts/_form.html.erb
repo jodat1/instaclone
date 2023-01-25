@@ -30,13 +30,16 @@
     <% invalid = post.errors.include?(:keywords)%>
     <%= form.label :keywords, style: "display: block" %>
     <%= form.text_field :keywords, class: "form-control" %>
+    
     <% if invalid%>
       <p style = "color: red;">
         <%= post.errors.full_messages_for(:keywords).join(", ")%>
       </p>
     <%end%>
-  </div>
 
+    <%= form.file_field :images, multiple: true%>
+  </div>
+  
   <div>
     <%= form.submit class: "btn btn-primary col-12" %>
   </div>
